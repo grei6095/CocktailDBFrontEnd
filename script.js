@@ -1,8 +1,9 @@
 const COCKTAIL_INPUT = document.querySelector('#cocktail-search__input');
 const COCKTAIL_BUTTON = document.querySelector('#cocktail-search__button');
-
+const RANDOM_COCKTAIL_BUTTON = document.querySelector('#cocktail-aleatorio__button');
 
 COCKTAIL_BUTTON.addEventListener('click', getCocktail);
+RANDOM_COCKTAIL_BUTTON.addEventListener('click', getRandomCocktail);
 
 async function getCocktail() {
     let value = COCKTAIL_INPUT.value;
@@ -24,6 +25,12 @@ function insertDataIntoPage(data) {
     container.appendChild(name);
     container.appendChild(receta);
     container.appendChild(rutaFoto);
-
     document.body.appendChild(container);
+}
+
+
+async function getRandomCocktail() {
+    let response = await fetch('https://www.gpcocktailclon.somee.com/api/Cocktail/aleatorio');
+    let data = await response.json();
+    insertDataIntoPage(data);
 }
