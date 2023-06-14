@@ -1,9 +1,11 @@
 const COCKTAIL_INPUT = document.querySelector('#cocktail-search__input');
 const COCKTAIL_BUTTON = document.querySelector('#cocktail-search__button');
 const RANDOM_COCKTAIL_BUTTON = document.querySelector('#cocktail-aleatorio__button');
+const ALL_COCKTAIL_BUTTON = document.querySelector('#cocktail-todos__button');
 
 COCKTAIL_BUTTON.addEventListener('click', getCocktail);
 RANDOM_COCKTAIL_BUTTON.addEventListener('click', getRandomCocktail);
+ALL_COCKTAIL_BUTTON.addEventListener('click', getAllCocktails);
 
 async function getCocktail() {
     let value = COCKTAIL_INPUT.value;
@@ -33,4 +35,10 @@ async function getRandomCocktail() {
     let response = await fetch('https://www.gpcocktailclon.somee.com/api/Cocktail/aleatorio');
     let data = await response.json();
     insertDataIntoPage(data);
+}
+
+async function getAllCocktails() {
+    let response = await fetch('https://www.gpcocktailclon.somee.com/api/Cocktail/todos');
+    let data = await response.json();
+    data.forEach(element => insertDataIntoPage(element));
 }
